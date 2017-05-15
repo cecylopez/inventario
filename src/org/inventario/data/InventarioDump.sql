@@ -1,3 +1,4 @@
+
 CREATE DATABASE  IF NOT EXISTS `Inventario` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `Inventario`;
 -- MySQL dump 10.13  Distrib 5.6.17, for osx10.6 (i386)
