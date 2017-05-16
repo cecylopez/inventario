@@ -2,6 +2,9 @@ package org.inventario.data.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import lombok.ToString;
+
 import java.util.List;
 
 
@@ -11,6 +14,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="AsignacionItem.findAll", query="SELECT a FROM AsignacionItem a")
+@ToString
 public class AsignacionItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 

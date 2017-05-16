@@ -2,6 +2,9 @@ package org.inventario.data.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import lombok.ToString;
+
 import java.util.Date;
 
 
@@ -11,6 +14,7 @@ import java.util.Date;
  */
 @Entity
 @NamedQuery(name="SolicitudMovimiento.findAll", query="SELECT s FROM SolicitudMovimiento s")
+@ToString
 public class SolicitudMovimiento implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.inventario.data.entities.Usuario;
 
 public class Main {
 
@@ -31,9 +32,10 @@ public class Main {
 		}
 		
 		//validacion de JPA
-		
 		EntityManager eMgr;
 		eMgr = Persistence.createEntityManagerFactory("inventario").createEntityManager();
+		//pruebas de @ToString∆
+		System.out.println(	"Este es el sysout del usuario "+ new Usuario().toString());
 	}
 
 }
