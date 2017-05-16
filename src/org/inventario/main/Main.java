@@ -3,6 +3,9 @@ package org.inventario.main;
 import java.io.IOException;
 import java.util.Properties;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -26,6 +29,11 @@ public class Main {
 		    logger = Logger.getLogger(Main.class);
 		    logger.error("Error tratando de configurar log4j con el archivo propiedades. Se configura de forma básica: " + e.getMessage(), e);
 		}
+		
+		//validacion de JPA
+		
+		EntityManager eMgr;
+		eMgr = Persistence.createEntityManagerFactory("inventario").createEntityManager();
 	}
 
 }
