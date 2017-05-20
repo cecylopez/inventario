@@ -10,6 +10,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.inventario.data.entities.Usuario;
+import org.inventario.util.SecurityHelper;
 
 public class Main {
 
@@ -36,6 +37,7 @@ public class Main {
 		eMgr = Persistence.createEntityManagerFactory("inventario").createEntityManager();
 		//pruebas de @ToString∆
 		System.out.println(	"Este es el sysout del usuario "+ new Usuario().toString());
+		logger.info(SecurityHelper.encriptar("prueba123"));
 	}
 
 }
