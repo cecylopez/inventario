@@ -13,6 +13,7 @@ import java.util.List;
  * 
  */
 @Entity
+@Table (name="`Item`")
 @NamedQuery(name="Item.findAll", query="SELECT i FROM Item i")
 @ToString
 public class Item implements Serializable {

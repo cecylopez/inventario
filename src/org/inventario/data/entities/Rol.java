@@ -12,7 +12,8 @@ import java.util.List;
  * The persistent class for the Rol database table.
  * 
  */
-@Entity
+@Entity 
+@Table (name="`Rol`")
 @NamedQuery(name="Rol.findAll", query="SELECT r FROM Rol r")
 @ToString
 public class Rol implements Serializable {

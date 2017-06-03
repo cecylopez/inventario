@@ -12,9 +12,9 @@
 		<class>org.inventario.data.entities.TipoMovimiento</class>
 		<class>org.inventario.data.entities.Usuario</class>
 		<properties>
-		<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/inventario"/>
-		<property name="javax.persistence.jdbc.user" value="root"/>
-		<property name="javax.persistence.jdbc.password" value="prueba"/>
+		<property name="javax.persistence.jdbc.url" value="jdbc:mysql://hngomrlb3vfq3jcr.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/fb5pmk6vkxey5bmz"/>
+		<property name="javax.persistence.jdbc.user" value="f0v0578m0m7uf10d"/>
+		<property name="javax.persistence.jdbc.password" value="y2tk33nqbqequ808"/>
 		<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 		<property name="eclipselink.logging.level" value="FINEST"/>
 		<property name="eclipselink.logging.level.sql" value="FINEST"/>

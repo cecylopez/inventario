@@ -14,6 +14,7 @@ import java.util.List;
  * 
  */
 @Entity
+@Table (name="`MovimientoItem`")
 @NamedQuery(name="MovimientoItem.findAll", query="SELECT m FROM MovimientoItem m")
 @ToString
 public class MovimientoItem implements Serializable {

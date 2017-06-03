@@ -13,6 +13,7 @@ import java.util.Date;
  * 
  */
 @Entity
+@Table (name= "`SolicitudAsignacion`")
 @NamedQuery(name="SolicitudMovimiento.findAll", query="SELECT s FROM SolicitudMovimiento s")
 @ToString
 public class SolicitudMovimiento implements Serializable {
