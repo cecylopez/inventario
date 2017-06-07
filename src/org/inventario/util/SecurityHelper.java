@@ -11,9 +11,7 @@ public class SecurityHelper {
 	}
 	
 	public static synchronized boolean verificar(String clave, String encryptedPassword ){
-		passwordEncryptor.checkPassword(clave, encryptedPassword);
-		return true;
-		
+		return passwordEncryptor.checkPassword(clave, encryptedPassword);
 	}
 
 }
