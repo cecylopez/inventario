@@ -1,15 +1,9 @@
 package org.inventario.data;
 
-import lombok.ToString;
-
-@ToString
 public class Status {
-	private char code;
-	public void setCode(char code) {
-		this.code = code;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	private String description;
+	public static final String ACTIVO="A";
+	public static final String INACTIVO= "I";
+	public static final String ELIMINADO= "D";
+	
+			
 }

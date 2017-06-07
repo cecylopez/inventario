@@ -3,6 +3,9 @@ package org.inventario.data.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import java.util.List;
@@ -12,6 +15,8 @@ import java.util.List;
  * The persistent class for the Rol database table.
  * 
  */
+//Constructor con todos los campos
+@RequiredArgsConstructor
 @Entity 
 @Table (name="`Rol`")
 @NamedQuery(name="Rol.findAll", query="SELECT r FROM Rol r")
@@ -20,12 +25,13 @@ public class Rol implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@NonNull
 	private int id;
-
+	@NonNull
 	private String descripcion;
-
+	@NonNull
 	private String estado;
-
+	@NonNull
 	private String nombre;
 
 	//bi-directional many-to-one association to SolicitudAsignacion
