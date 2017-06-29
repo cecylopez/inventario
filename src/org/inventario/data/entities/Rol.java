@@ -3,6 +3,10 @@ package org.inventario.data.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.inventario.data.JsonEnabled;
+
+import com.google.gson.JsonObject;
+
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +24,7 @@ import java.util.List;
 @Entity 
 @Table (name="`Rol`")
 @NamedQuery(name="Rol.findAll", query="SELECT r FROM Rol r")
-@ToString
-public class Rol implements Serializable {
+public class Rol implements Serializable, JsonEnabled {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -145,6 +148,15 @@ public class Rol implements Serializable {
 		usuario.setRol(null);
 
 		return usuario;
+	}
+	public JsonObject toJson() {
+		JsonObject obj = new JsonObject();
+		obj.addProperty("id", this.getId());
+		obj.addProperty("nombre", this.getNombre());
+		obj.addProperty("estado", this.getEstado());
+		obj.addProperty("descripcion", this.getDescripcion());
+		
+		return obj;
 	}
 
 }

@@ -3,6 +3,10 @@ package org.inventario.data.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.inventario.data.JsonEnabled;
+
+import com.google.gson.JsonObject;
+
 import lombok.ToString;
 
 import java.util.List;
@@ -15,8 +19,7 @@ import java.util.List;
 @Entity
 @Table (name="`Item`")
 @NamedQuery(name="Item.findAll", query="SELECT i FROM Item i")
-@ToString
-public class Item implements Serializable {
+public class Item implements Serializable, JsonEnabled {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -167,6 +170,19 @@ public class Item implements Serializable {
 		movimientoItem.setItem(null);
 
 		return movimientoItem;
+	}
+	
+	public JsonObject toJson() {
+		JsonObject obj = new JsonObject();
+		obj.addProperty("id", this.getId());
+		obj.addProperty("nombre", this.getNombre());
+		obj.addProperty("estado", this.getEstado());
+		obj.addProperty("cantidad", this.getCantidad());
+		obj.addProperty("cantidad minima", this.getCantidadMinima());
+		obj.addProperty("codigo de barras", this.getCodigoBarras());
+		obj.addProperty("descripcion", this.getDescripcion());
+		
+		return obj;
 	}
 
 }

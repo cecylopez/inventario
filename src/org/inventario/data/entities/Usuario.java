@@ -3,6 +3,11 @@ package org.inventario.data.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.inventario.data.JsonEnabled;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import lombok.ToString;
 
 import java.util.List;
@@ -15,9 +20,9 @@ import java.util.List;
 @Entity
 @Table (name="`Usuario`")
 @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
-@ToString
-public class Usuario implements Serializable {
+public class Usuario implements Serializable, JsonEnabled {
 	private static final long serialVersionUID = 1L;
+	
 
 	@Id
 	private int id;
@@ -27,18 +32,6 @@ public class Usuario implements Serializable {
 	private String estado;
 
 	private String nombre;
-
-	//bi-directional many-to-one association to SolicitudAsignacion
-	@OneToMany(mappedBy="usuario1")
-	private List<SolicitudAsignacion> solicitudAsignacions1;
-
-	//bi-directional many-to-one association to SolicitudAsignacion
-	@OneToMany(mappedBy="usuario2")
-	private List<SolicitudAsignacion> solicitudAsignacions2;
-
-	//bi-directional many-to-one association to SolicitudMovimiento
-	@OneToMany(mappedBy="usuario")
-	private List<SolicitudMovimiento> solicitudMovimientos;
 
 	//bi-directional many-to-one association to Departamento
 	@ManyToOne
@@ -85,71 +78,26 @@ public class Usuario implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public List<SolicitudAsignacion> getSolicitudAsignacions1() {
-		return this.solicitudAsignacions1;
-	}
 
-	public void setSolicitudAsignacions1(List<SolicitudAsignacion> solicitudAsignacions1) {
-		this.solicitudAsignacions1 = solicitudAsignacions1;
-	}
 
-	public SolicitudAsignacion addSolicitudAsignacions1(SolicitudAsignacion solicitudAsignacions1) {
-		getSolicitudAsignacions1().add(solicitudAsignacions1);
-		solicitudAsignacions1.setUsuario1(this);
 
-		return solicitudAsignacions1;
-	}
 
-	public SolicitudAsignacion removeSolicitudAsignacions1(SolicitudAsignacion solicitudAsignacions1) {
-		getSolicitudAsignacions1().remove(solicitudAsignacions1);
-		solicitudAsignacions1.setUsuario1(null);
 
-		return solicitudAsignacions1;
-	}
 
-	public List<SolicitudAsignacion> getSolicitudAsignacions2() {
-		return this.solicitudAsignacions2;
-	}
+	
 
-	public void setSolicitudAsignacions2(List<SolicitudAsignacion> solicitudAsignacions2) {
-		this.solicitudAsignacions2 = solicitudAsignacions2;
-	}
+	
 
-	public SolicitudAsignacion addSolicitudAsignacions2(SolicitudAsignacion solicitudAsignacions2) {
-		getSolicitudAsignacions2().add(solicitudAsignacions2);
-		solicitudAsignacions2.setUsuario2(this);
+	
 
-		return solicitudAsignacions2;
-	}
 
-	public SolicitudAsignacion removeSolicitudAsignacions2(SolicitudAsignacion solicitudAsignacions2) {
-		getSolicitudAsignacions2().remove(solicitudAsignacions2);
-		solicitudAsignacions2.setUsuario2(null);
 
-		return solicitudAsignacions2;
-	}
 
-	public List<SolicitudMovimiento> getSolicitudMovimientos() {
-		return this.solicitudMovimientos;
-	}
 
-	public void setSolicitudMovimientos(List<SolicitudMovimiento> solicitudMovimientos) {
-		this.solicitudMovimientos = solicitudMovimientos;
-	}
 
-	public SolicitudMovimiento addSolicitudMovimiento(SolicitudMovimiento solicitudMovimiento) {
-		getSolicitudMovimientos().add(solicitudMovimiento);
-		solicitudMovimiento.setUsuario(this);
+	
 
-		return solicitudMovimiento;
-	}
 
-	public SolicitudMovimiento removeSolicitudMovimiento(SolicitudMovimiento solicitudMovimiento) {
-		getSolicitudMovimientos().remove(solicitudMovimiento);
-		solicitudMovimiento.setUsuario(null);
-
-		return solicitudMovimiento;
-	}
 
 	public Departamento getDepartamento() {
 		return this.departamento;
@@ -165,6 +113,15 @@ public class Usuario implements Serializable {
 
 	public void setRol(Rol rol) {
 		this.rol = rol;
+	}
+	
+	public JsonObject toJson() {
+		JsonObject obj = new JsonObject();
+		obj.addProperty("id", this.getId());
+		obj.addProperty("nombre", this.getNombre());
+		obj.addProperty("estado", this.getEstado());
+		
+		return obj;
 	}
 
 }

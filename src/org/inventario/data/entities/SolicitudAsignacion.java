@@ -3,6 +3,10 @@ package org.inventario.data.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.inventario.data.JsonEnabled;
+
+import com.google.gson.JsonObject;
+
 import lombok.ToString;
 
 import java.util.Date;
@@ -15,8 +19,7 @@ import java.util.Date;
 @Entity
 @Table (name="`SolicitudAsignacion`")
 @NamedQuery(name="SolicitudAsignacion.findAll", query="SELECT s FROM SolicitudAsignacion s")
-@ToString
-public class SolicitudAsignacion implements Serializable {
+public class SolicitudAsignacion implements Serializable, JsonEnabled {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -105,6 +108,14 @@ public class SolicitudAsignacion implements Serializable {
 
 	public void setUsuario2(Usuario usuario2) {
 		this.usuario2 = usuario2;
+	}
+	public JsonObject toJson() {
+		JsonObject obj = new JsonObject();
+		obj.addProperty("id", this.getId());
+		obj.addProperty("fechaAutorizacion", this.getFechaAutorizacion().toString());
+		obj.addProperty("fechaSolicitud", this.getFechaSolicitud().toString());
+		
+		return obj;
 	}
 
 }
