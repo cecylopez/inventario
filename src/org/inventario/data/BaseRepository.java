@@ -41,7 +41,7 @@ public class BaseRepository<T> {
 	
 	public List<T> getAll(){
 		List<T> listaT = new ArrayList<>(0);
-		TypedQuery<T> qry= eMgr.createQuery("SELECT o FROM "+ clase.getSimpleName(), clase);
+		TypedQuery<T> qry= eMgr.createQuery("SELECT o FROM "+ clase.getSimpleName() + " o", clase);
 		listaT =qry.getResultList();
 		return listaT;
 	}
