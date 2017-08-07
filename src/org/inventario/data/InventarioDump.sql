@@ -216,6 +216,8 @@ CREATE TABLE `SolicitudAsignacion` (
   `FechaAutorizacion` datetime NOT NULL,
   `AsignacionItemID` int(11) NOT NULL,
   `UsuarioID` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL DEFAULT '1',
+  `estado` varchar(1) NOT NULL DEFAULT 'P',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`),
   KEY `fk_SolicitudAsignacion_AsignacionItem1_idx` (`AsignacionItemID`),
