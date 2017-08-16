@@ -120,6 +120,8 @@ public class Usuario implements Serializable, JsonEnabled {
 		obj.addProperty("id", this.getId());
 		obj.addProperty("nombre", this.getNombre());
 		obj.addProperty("estado", this.getEstado());
+	    obj.addProperty("rol", getRol().getNombre());
+	    obj.addProperty("departamento", getDepartamento().getNombre());
 		
 		return obj;
 	}

@@ -87,5 +87,11 @@ public class BaseRepository<T> {
 		maxId=qry.getSingleResult();
 		return maxId;
 	}
-
+	 public long getTotal()
+	  {
+	    long total = 0L;
+	    TypedQuery<Long> qry = this.eMgr.createQuery("SELECT COUNT(o.id) FROM " + this.clase.getSimpleName() + " o", Long.class);
+	    total = ((Long)qry.getSingleResult()).longValue();
+	    return total;
+	  }
 }
