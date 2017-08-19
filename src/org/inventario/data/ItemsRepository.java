@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
+import org.inventario.data.entities.AsignacionItem;
 import org.inventario.data.entities.Item;
 
 public class ItemsRepository
@@ -42,7 +44,7 @@ public class ItemsRepository
     return items;
   }
   
-  public List<Item> get(Long departamentoId, String nombreItem, int startIndex, int pageSize)
+  public List<Item> get(long departamentoId, String nombreItem, int startIndex, int pageSize)
   {
     List<Item> items = new ArrayList(0);
     TypedQuery<Item> qry = null;
@@ -62,5 +64,14 @@ public class ItemsRepository
     return items;
   }
   
+  public AsignacionItem get(long departamentoId, long itemId ){
+	  AsignacionItem item= null;
+	  TypedQuery<AsignacionItem> qry=this.eMgr.createQuery("SELECT a from AsignacionItem a WHERE a.departamento.id=:departamentoId AND a.item.id=:itemId", AsignacionItem.class);
+	  qry.setParameter("departamentoId", departamentoId);
+	  qry.setParameter("itemId", itemId);
+	 item= qry.getSingleResult();
+	  
+	  return item;
+  }
 
 }
