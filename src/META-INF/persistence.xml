@@ -20,6 +20,8 @@
 		<property name="eclipselink.logging.level.sql" value="FINEST"/>
 		<property name="eclipselink.logging.parameters" value="true"/>
 		<property name="eclipselink.logging.level.cache" value="FINEST"/>
+		<!-- https://stackoverflow.com/a/25404917 para problemas por utilizar valor 0 -->
+		<property name="eclipselink.allow-zero-id" value="true"/>
 		</properties>
 	</persistence-unit>
 </persistence>
