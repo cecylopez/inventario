@@ -2,7 +2,6 @@ package org.inventario.data;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import org.inventario.data.entities.AsignacionItem;
@@ -18,7 +17,7 @@ public class ItemsRepository
   
   public List<Item> get(Long departamentoId)
   {
-    List<Item> items = new ArrayList(0);
+    List<Item> items = new ArrayList<>(0);
     TypedQuery<Item> qry = this.eMgr.createQuery("SELECT i FROM Item i INNER JOIN AsignacionItem a ON i.id=a.item.id WHERE a.departamento.id=:id", Item.class);
     qry.setParameter("id", departamentoId);
     items = qry.getResultList();
@@ -27,7 +26,7 @@ public class ItemsRepository
   
   public List<Item> get(Long departamentoId, String nombreItem)
   {
-    List<Item> items = new ArrayList(0);
+    List<Item> items = new ArrayList<>(0);
     TypedQuery<Item> qry = null;
     if ((nombreItem != null) && (nombreItem.trim().length() > 0))
     {
@@ -46,7 +45,7 @@ public class ItemsRepository
   
   public List<Item> get(long departamentoId, String nombreItem, int startIndex, int pageSize)
   {
-    List<Item> items = new ArrayList(0);
+    List<Item> items = new ArrayList<>(0);
     TypedQuery<Item> qry = null;
     if ((nombreItem != null) && (nombreItem.trim().length() > 0))
     {
@@ -71,6 +70,14 @@ public class ItemsRepository
 	  qry.setParameter("itemId", itemId);
 	 item= qry.getSingleResult();
 	  
+	  return item;
+  }
+  
+  public Item getItem(Long itemId){
+	  Item item= new Item();
+	  TypedQuery<Item> qry= this.eMgr.createQuery("SELECT i from Item i WHERE i.id=:id", Item.class);
+	  qry.setParameter("id", itemId);
+	  item=qry.getSingleResult();
 	  return item;
   }
 
