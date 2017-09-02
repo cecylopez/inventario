@@ -144,6 +144,7 @@ public class SolicitudAsignacion implements Serializable, JsonEnabled {
 		obj.addProperty("solicitante", this.getUsuario1().getNombre());
 		obj.addProperty("fechaSolicitud", this.fmt.format(fechaSolicitud));
 		obj.addProperty("item", this.getAsignacionItem().getItem().getNombre());
+		obj.addProperty("itemId", this.getAsignacionItem().getItem().getId());
 		obj.addProperty("cantidad", this.getCantidad());
 		obj.addProperty("estado", this.getEstado());
 		obj.addProperty("autorizador", this.getUsuario2() !=null? this.getUsuario2().getNombre():"");
