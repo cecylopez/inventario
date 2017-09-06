@@ -49,12 +49,12 @@ public class ItemsRepository
     TypedQuery<Item> qry = null;
     if ((nombreItem != null) && (nombreItem.trim().length() > 0))
     {
-      qry = this.eMgr.createQuery("SELECT i FROM Item i INNER JOIN AsignacionItem a ON i.id=a.item.id WHERE a.departamento.id=:id AND i.nombre LIKE :nombre ORDER BY i.id", Item.class);
+      qry = this.eMgr.createQuery("SELECT i FROM Item i INNER JOIN AsignacionItem a ON i.id=a.item.id WHERE a.departamento.id=:id AND i.nombre LIKE :nombre AND i.estado='A' ORDER BY i.id", Item.class);
       qry.setParameter("nombre", "%" + nombreItem + "%");
     }
     else
     {
-      qry = this.eMgr.createQuery("SELECT i FROM Item i INNER JOIN AsignacionItem a ON i.id=a.item.id WHERE a.departamento.id=:id ORDER BY i.id", Item.class);
+      qry = this.eMgr.createQuery("SELECT i FROM Item i INNER JOIN AsignacionItem a ON i.id=a.item.id WHERE a.departamento.id=:id AND i.estado='A' ORDER BY i.id", Item.class);
     }
     qry.setParameter("id", departamentoId);
     qry.setFirstResult(startIndex);
@@ -79,6 +79,16 @@ public class ItemsRepository
 	  qry.setParameter("id", itemId);
 	  item=qry.getSingleResult();
 	  return item;
+  }
+  
+  public long getTotal(long departamentoId, String nombreItem)
+  {
+    long total = 0L;
+    TypedQuery<Long> qry = this.eMgr.createQuery("SELECT COUNT(i.id) FROM Item i INNER JOIN AsignacionItem a ON i.id=a.item.id WHERE a.departamento.id=:id AND i.nombre LIKE :nombre AND i.estado='A' ORDER BY i.id ", Long.class);
+    qry.setParameter("id", departamentoId);
+    qry.setParameter("nombre", "%" + nombreItem + "%");
+    total = ((Long)qry.getSingleResult()).longValue();
+    return total;
   }
 
 }

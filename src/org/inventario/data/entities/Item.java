@@ -177,6 +177,7 @@ public class Item implements Serializable, JsonEnabled {
 		obj.addProperty("id", this.getId());
 		obj.addProperty("nombre", this.getNombre());
 		obj.addProperty("estado", this.getEstado());
+		obj.addProperty("categoria", this.getCategoria().getNombre());
 		obj.addProperty("cantidad", this.getCantidad());
 		obj.addProperty("cantidad minima", this.getCantidadMinima());
 		obj.addProperty("codigo de barras", this.getCodigoBarras());
