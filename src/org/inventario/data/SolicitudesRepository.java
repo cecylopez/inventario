@@ -33,4 +33,13 @@ public class SolicitudesRepository
     solicitudes = qry.getResultList();
     return solicitudes;
   }
+  
+  public SolicitudAsignacion getSolicitudPendiente(long departamentoId, long itemId){
+	  SolicitudAsignacion solicitud= new SolicitudAsignacion();
+	  TypedQuery<SolicitudAsignacion> qry=this.eMgr.createQuery("SELECT s FROM SolicitudAsignacion s INNER JOIN AsignacionItem a ON s.asignacionItem.id=a.id  WHERE a.departamento.id= :departamentoId AND a.item.id= :itemId AND  s.estado='P'", SolicitudAsignacion.class);
+	  qry.setParameter("departamentoId", departamentoId);
+	  qry.setParameter("itemId", itemId);
+	  solicitud=qry.getSingleResult();
+	  return solicitud;
+  }
 }
