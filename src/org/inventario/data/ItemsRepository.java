@@ -90,5 +90,10 @@ public class ItemsRepository
     total = ((Long)qry.getSingleResult()).longValue();
     return total;
   }
+  public void update(AsignacionItem asignacionItem){
+	  eMgr.getTransaction().begin();
+	  eMgr.merge(asignacionItem);
+	  eMgr.getTransaction().commit();
+  }
 
 }
