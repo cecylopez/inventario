@@ -2,7 +2,9 @@ package org.inventario.tests;
 
 import static org.junit.Assert.*;
 
+import java.net.URI;
 import java.util.List;
+import java.util.Properties;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -17,7 +19,16 @@ public class JPATest {
 
 	@Before
 	public void setUp() throws Exception {
-		eMgr = Persistence.createEntityManagerFactory("inventario").createEntityManager();
+		URI dbUri;
+		dbUri = new URI(System.getenv("JAWSDB_URL"));
+		 String username = dbUri.getUserInfo().split(":")[0];
+		    String password = dbUri.getUserInfo().split(":")[1];
+		    String dbUrl = "jdbc:mysql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+			Properties properties= new Properties();
+			properties.setProperty("javax.persistence.jdbc.url", dbUrl);
+			properties.setProperty("javax.persistence.jdbc.user", username);
+			properties.setProperty("javax.persistence.jdbc.password", password);
+			eMgr = Persistence.createEntityManagerFactory("inventario", properties).createEntityManager();
 
 	}
 
