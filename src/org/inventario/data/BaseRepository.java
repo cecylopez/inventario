@@ -1,7 +1,10 @@
 package org.inventario.data;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -56,8 +59,24 @@ public class BaseRepository<T> {
 	}
 
 	public void refresh() {
+		//https://stackoverflow.com/questions/19773258/how-to-modify-properties-after-create-entity-manager-factory-from-persistence-xm
 		close();
-		eMgr = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT).createEntityManager();
+		URI dbUri;
+		try {
+			//https://devcenter.heroku.com/articles/connecting-to-relational-databases-on-heroku-with-java
+			dbUri = new URI(System.getenv("JAWSDB_URL"));
+			 String username = dbUri.getUserInfo().split(":")[0];
+			    String password = dbUri.getUserInfo().split(":")[1];
+			    String dbUrl = "jdbc:mysql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+				Properties properties= new Properties();
+				properties.setProperty("javax.persistence.jdbc.url", dbUrl);
+				properties.setProperty("javax.persistence.jdbc.user", username);
+				properties.setProperty("javax.persistence.jdbc.password", password);
+				eMgr = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT, properties).createEntityManager();
+		} catch (URISyntaxException e) {
+			logger.error("Exception: " + e.getMessage(), e);	
+		}
+	   
 
 	}
 	
